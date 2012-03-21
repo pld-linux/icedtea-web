@@ -21,6 +21,8 @@ Source0:	http://icedtea.classpath.org/download/source/%{name}-%{version}.tar.gz
 BuildRequires:	rpm-javaprov
 BuildRequires:	xulrunner-devel
 BuildRequires:	zlib-devel
+Requires:	icedtea6-jre-base >= 1.9
+Obsoletes:	icedtea6-jre-base-mozilla-plugin
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -40,7 +42,7 @@ BuildRequires:	gtk+2-devel
 %{?with_tests:BuildRequires:	java-junit}
 BuildRequires:	java-rhino
 BuildRequires:	jpackage-utils
-Requires:	%{name}-jre-base-mozilla-plugin = %{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 Requires:	browser-plugins >= 2.0
 Requires:	browser-plugins(%{_target_base_arch})
 Obsoletes:	browser-plugin-java-icedtea6
