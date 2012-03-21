@@ -12,7 +12,7 @@ Summary:	Web browser Java plugin and an implementation of Java Web Start
 Summary(pl.UTF-8):	Wtyczka Java dla przeglądarek WWW i implementacja Java Web Start
 Name:		icedtea-web
 Version:	1.2
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications
 Source0:	http://icedtea.classpath.org/download/source/%{name}-%{version}.tar.gz
