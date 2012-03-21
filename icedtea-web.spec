@@ -17,8 +17,6 @@ License:	GPL v2
 Group:		Applications
 Source0:	http://icedtea.classpath.org/download/source/%{name}-%{version}.tar.gz
 # Source0-md5:	8f50cfb1b65d620a7812b5976f394598
-%prep
-
 %buildrequires_jdk
 BuildRequires:	rpm-javaprov
 BuildRequires:	xulrunner-devel
@@ -92,7 +90,7 @@ install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-ln -s %{_libdir}/IcedTeaPlugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
+ln -s %{_libdir}/IcedTeaPlugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}/libjavaplugin.so
 
 ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
@@ -121,7 +119,7 @@ fi
 
 %files -n browser-plugin-java-%{name}
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_browserpluginsdir}/IcedTeaPlugin.so
+%attr(755,root,root) %{_browserpluginsdir}/libjavaplugin.so
 
 %if %{with javadoc}
 %files javadoc
