@@ -17,6 +17,7 @@ License:	GPL v2
 Group:		Applications
 Source0:	http://icedtea.classpath.org/download/source/%{name}-%{version}.tar.gz
 # Source0-md5:	8f50cfb1b65d620a7812b5976f394598
+URL:		http://icedtea.classpath.org/wiki/IcedTea-Web
 %buildrequires_jdk
 BuildRequires:	rpm-javaprov
 BuildRequires:	xulrunner-devel
