@@ -6,7 +6,7 @@
 %bcond_without	javadoc		# don't build javadoc
 %bcond_with	tests		# build with tests (interactive?)
 
-%define	use_jdk	icedtea6
+%define	use_jdk	icedtea7
 
 Summary:	Web browser Java plugin and an implementation of Java Web Start
 Summary(pl.UTF-8):	Wtyczka Java dla przeglądarek WWW i implementacja Java Web Start
