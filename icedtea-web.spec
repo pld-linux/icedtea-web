@@ -1,4 +1,3 @@
-
 # TODO:
 #	- separate netx.jar? I guess it contains the JNLP implementation
 
@@ -12,17 +11,17 @@ Summary:	Web browser Java plugin and an implementation of Java Web Start
 Summary(pl.UTF-8):	Wtyczka Java dla przeglądarek WWW i implementacja Java Web Start
 Name:		icedtea-web
 Version:	1.3.2
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications
 Source0:	http://icedtea.wildebeest.org/download/source/%{name}-%{version}.tar.gz
 # Source0-md5:	94ce02c42c1e4d1411357fb3c1014f67
 URL:		http://icedtea.classpath.org/wiki/IcedTea-Web
-%buildrequires_jdk
 BuildRequires:	rpm-javaprov
 BuildRequires:	xulrunner-devel
 BuildRequires:	zlib-devel
-Requires:	icedtea6-jre-base >= 1.9
+%{?buildrequires_jdk}
+Requires:	icedtea7-jre-base >= 1.9
 Obsoletes:	icedtea6-jre-base-mozilla-plugin
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -89,12 +88,10 @@ Javadoc pour %{name}.
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
-
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 ln -s %{_libdir}/IcedTeaPlugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}/libjavaplugin.so
-
 ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
 %clean
@@ -111,12 +108,12 @@ if [ "$1" = 0 ]; then
 	%update_browser_plugins
 fi
 
-
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
-%attr(755,root,root) %{_bindir}/*
-%{_libdir}/IcedTeaPlugin.so
+%attr(755,root,root) %{_bindir}/javaws
+%attr(755,root,root) %{_bindir}/itweb-settings
+%attr(755,root,root) %{_libdir}/IcedTeaPlugin.so
 %{_datadir}/%{name}
 %{_mandir}/man1/javaws.*
 
