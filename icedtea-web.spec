@@ -11,12 +11,18 @@ Summary:	Web browser Java plugin and an implementation of Java Web Start
 Summary(pl.UTF-8):	Wtyczka Java dla przeglądarek WWW i implementacja Java Web Start
 Name:		icedtea-web
 Version:	1.4.2
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications
 Source0:	http://icedtea.wildebeest.org/download/source/%{name}-%{version}.tar.gz
 # Source0-md5:	ad4fd669f482e5f69a124061229df517
 URL:		http://icedtea.classpath.org/wiki/IcedTea-Web
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	gtk+2-devel
+%{?with_tests:BuildRequires:	java-junit}
+BuildRequires:	java-rhino
+BuildRequires:	jpackage-utils
 BuildRequires:	libxslt-progs
 BuildRequires:	rpm-javaprov
 BuildRequires:	xulrunner-devel
@@ -36,13 +42,6 @@ project.
 Summary:	IceTea Java plugin for WWW browsers
 Summary(pl.UTF-8):	Wtyczka Javy do przeglądarek WWW
 Group:		Development/Languages/Java
-URL:		http://icedtea.classpath.org/wiki/IcedTea-Web
-BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	gtk+2-devel
-%{?with_tests:BuildRequires:	java-junit}
-BuildRequires:	java-rhino
-BuildRequires:	jpackage-utils
 Requires:	%{name} = %{version}-%{release}
 Requires:	browser-plugins >= 2.0
 Requires:	browser-plugins(%{_target_base_arch})
@@ -59,6 +58,9 @@ Summary:	Online manual for %{name}
 Summary(pl.UTF-8):	Dokumentacja online do %{name}
 Group:		Documentation
 Requires:	jpackage-utils
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description javadoc
 Documentation for %{name}.
@@ -88,11 +90,10 @@ Javadoc pour %{name}.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
-
 %{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
 ln -s %{_libdir}/IcedTeaPlugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}/libjavaplugin.so
 ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
@@ -117,7 +118,7 @@ fi
 %attr(755,root,root) %{_bindir}/itweb-settings
 %attr(755,root,root) %{_libdir}/IcedTeaPlugin.so
 %{_datadir}/%{name}
-%{_mandir}/man1/javaws.*
+%{_mandir}/man1/javaws.1*
 
 %files -n browser-plugin-java-%{name}
 %defattr(644,root,root,755)
