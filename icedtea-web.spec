@@ -10,12 +10,12 @@
 Summary:	Web browser Java plugin and an implementation of Java Web Start
 Summary(pl.UTF-8):	Wtyczka Java dla przeglądarek WWW i implementacja Java Web Start
 Name:		icedtea-web
-Version:	1.4.2
-Release:	2
+Version:	1.5
+Release:	1
 License:	GPL v2
 Group:		Applications
 Source0:	http://icedtea.wildebeest.org/download/source/%{name}-%{version}.tar.gz
-# Source0-md5:	ad4fd669f482e5f69a124061229df517
+# Source0-md5:	a6199869763291879f3a7382b114974c
 URL:		http://icedtea.classpath.org/wiki/IcedTea-Web
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -116,9 +116,12 @@ fi
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/javaws
 %attr(755,root,root) %{_bindir}/itweb-settings
+%attr(755,root,root) %{_bindir}/policyeditor
 %attr(755,root,root) %{_libdir}/IcedTeaPlugin.so
 %{_datadir}/%{name}
+%{_mandir}/man1/itweb-settings.1*
 %{_mandir}/man1/javaws.1*
+%{_mandir}/man1/policyeditor.1*
 
 %files -n browser-plugin-java-%{name}
 %defattr(644,root,root,755)
