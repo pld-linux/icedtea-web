@@ -28,7 +28,6 @@ BuildRequires:	rpm-javaprov
 BuildRequires:	xulrunner-devel
 BuildRequires:	zlib-devel
 %{?buildrequires_jdk}
-Requires:	icedtea7-jre-base >= 1.9
 Obsoletes:	icedtea6-jre-base-mozilla-plugin
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
