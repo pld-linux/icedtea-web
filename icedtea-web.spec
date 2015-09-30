@@ -2,7 +2,7 @@
 #	- separate netx.jar? I guess it contains the JNLP implementation
 
 # Conditional build:
-%bcond_without	javadoc		# don't build javadoc
+%bcond_with	javadoc		# don't build javadoc
 %bcond_with	tests		# build with tests (interactive?)
 
 %define	use_jdk	icedtea7
