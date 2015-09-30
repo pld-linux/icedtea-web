@@ -95,7 +95,10 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
 ln -s %{_libdir}/IcedTeaPlugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}/libjavaplugin.so
+
+%if %{with javadoc}
 ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
