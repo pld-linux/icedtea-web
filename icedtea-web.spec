@@ -18,7 +18,7 @@ URL:		http://icedtea.classpath.org/wiki/IcedTea-Web
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gtk+2-devel
-BuildRequires:	iceweasel-devel
+BuildRequires:	xulrunner-devel
 %{?with_tests:BuildRequires:	java-junit}
 BuildRequires:	java-rhino
 BuildRequires:	jpackage-utils
