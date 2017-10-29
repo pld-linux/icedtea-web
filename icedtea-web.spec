@@ -4,21 +4,22 @@
 # Conditional build:
 %bcond_with	javadoc		# don't build javadoc
 %bcond_with	tests		# build with tests (interactive?)
+%bcond_with	native_plugin	# Native Firefox Plugin
 
 Summary:	Web browser Java plugin and an implementation of Java Web Start
 Summary(pl.UTF-8):	Wtyczka Java dla przeglądarek WWW i implementacja Java Web Start
 Name:		icedtea-web
-Version:	1.6.2
-Release:	2
+Version:	1.7
+Release:	1
 License:	GPL v2
 Group:		Applications
 Source0:	http://icedtea.wildebeest.org/download/source/%{name}-%{version}.tar.gz
-# Source0-md5:	ef9b7746dab933afa871428da73169f6
+# Source0-md5:	63bcda2c106e1a7e79afc7e9c9cb0a47
 URL:		http://icedtea.classpath.org/wiki/IcedTea-Web
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gtk+2-devel
-BuildRequires:	iceweasel-devel
+%{?with_native_plugin:BuildRequires:	iceweasel-devel}
 %{?with_tests:BuildRequires:	java-junit}
 BuildRequires:	java-rhino
 BuildRequires:	jpackage-utils
@@ -79,6 +80,7 @@ Javadoc pour %{name}.
 %configure \
 	--with-java=%{_bindir}/java \
 	--with-jdk-home="%{java_home}" \
+	%{__enable_disable native-plugin} \
 	--docdir="%{_javadocdir}/%{name}-%{version}" \
 	%{!?with_javadoc:--disable-docs}
 
@@ -91,8 +93,10 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%if %{with native_plugin}
 install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
 ln -s %{_libdir}/IcedTeaPlugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}/libjavaplugin.so
+%endif
 
 %if %{with javadoc}
 ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
@@ -118,7 +122,7 @@ fi
 %attr(755,root,root) %{_bindir}/javaws
 %attr(755,root,root) %{_bindir}/itweb-settings
 %attr(755,root,root) %{_bindir}/policyeditor
-%attr(755,root,root) %{_libdir}/IcedTeaPlugin.so
+%{?with_native_plugin:%attr(755,root,root) %{_libdir}/IcedTeaPlugin.so}
 %{_datadir}/%{name}
 %{_pixmapsdir}/javaws.png
 %{_mandir}/man1/*.1*
@@ -126,9 +130,11 @@ fi
 %lang(de) %{_mandir}/de/man1/*.1*
 %lang(pl) %{_mandir}/pl/man1/*.1*
 
+%if %{with native_plugin}
 %files -n browser-plugin-java-%{name}
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_browserpluginsdir}/libjavaplugin.so
+%endif
 
 %if %{with javadoc}
 %files javadoc
