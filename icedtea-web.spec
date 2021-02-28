@@ -57,9 +57,7 @@ Summary:	Online manual for %{name}
 Summary(pl.UTF-8):	Dokumentacja online do %{name}
 Group:		Documentation
 Requires:	jpackage-utils
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description javadoc
 Documentation for %{name}.
